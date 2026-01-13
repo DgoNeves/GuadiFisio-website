@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GuadiFisio - Fisioterapia</title>
+    <!-- Fontes Modernas -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1D5EA7;
+            --secondary: #639D41;
+            --dark: #1a1a1a;
+            --light: #f8f9fa;
+            --white: #ffffff;
+            --gray: #6c757d;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--white);
+            overflow-x: hidden;
+        }
+
+        /* --- Utilidades --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background-color: #15467e;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(29, 94, 167, 0.3);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        /* --- Header --- */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            backdrop-filter: blur(10px);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .logo-placeholder {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            padding: 180px 0 100px;
+            background: linear-gradient(135deg, #f0f7ff 0%, #ffffff 100%);
+            position: relative;
+        }
+
+        .hero-flex {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 25px;
+            color: var(--primary);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: var(--gray);
+            margin-bottom: 35px;
+            max-width: 500px;
+        }
+
+        .hero-image {
+            flex: 1;
+            position: relative;
+        }
+
+        .hero-image svg {
+            width: 100%;
+            height: auto;
+            max-width: 500px;
+            border-radius: 20px;
+            filter: drop-shadow(0 20px 40px rgba(0,0,0,0.1));
+        }
+
+        /* --- Serviços --- */
+        .services {
+            padding: 100px 0;
+            background: var(--white);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .section-header .divider {
+            width: 70px;
+            height: 4px;
+            background: var(--secondary);
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            padding: 40px;
+            background: var(--light);
+            border-radius: 20px;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+
+        .service-card:hover {
+            background: var(--white);
+            border-color: var(--secondary);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.05);
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+
+        .service-card h3 {
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        /* --- About Section --- */
+        .about {
+            padding: 100px 0;
+            background: #fdfdfd;
+        }
+
+        .about-flex {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            flex-direction: row-reverse;
+        }
+
+        .about-content {
+            flex: 1;
+        }
+
+        .about-image {
+            flex: 1;
+        }
+
+        .stats {
+            display: flex;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .stat-item h4 {
+            font-size: 2rem;
+            color: var(--secondary);
+        }
+
+        /* --- Footer --- */
+        footer {
+            background: var(--primary);
+            color: var(--white);
+            padding: 80px 0 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .footer-col h4 {
+            margin-bottom: 25px;
+            font-size: 1.2rem;
+            position: relative;
+        }
+
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--secondary);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+            padding-left: 5px;
+        }
+
+        .contact-info li {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .footer-bottom {
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* --- Responsive --- */
+        @media (max-width: 992px) {
+            .hero-flex, .about-flex {
+                flex-direction: column;
+                text-align: center;
+            }
+            .hero-content h1 {
+                font-size: 2.8rem;
+            }
+            .hero-content p {
+                margin: 0 auto 35px;
+            }
+            .about-flex {
+                flex-direction: column;
+            }
+            .stats {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .mobile-menu-btn {
+                display: block;
+            }
+            .hero {
+                padding: 140px 0 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navigation -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo" style="width: 200px;">
+                    <img src="logo.png"  style="width: inherit;" />
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#inicio"  style="padding: 10px 20px;">Início</a></li>
+                    <li><a href="#servicos"  style="padding: 10px 20px;">Serviços</a></li>
+                    <li><a href="#sobre"  style="padding: 10px 20px;">Sobre</a></li>
+                    <li><a href="#contactos"  style="padding: 10px 20px;">Contactos</a></li>
+                </ul>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="container">
+            <div class="hero-flex">
+                <div class="hero-content">
+                    <h1>Recupere a sua <span style="color: var(--secondary);">Mobilidade</span> e Bem-Estar</h1>
+                    <p>Fisioterapia especializada em Portugal. Tratamentos personalizados para atletas, idosos e recuperação pós-operatória com tecnologia de ponta.</p>
+                    <div class="hero-btns">
+                        <a href="#contactos" class="btn btn-primary">Marcar Avaliação</a>
+                        <a href="#servicos" class="btn btn-outline" style="margin-left: 15px;">Ver Serviços</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="servicos">
+        <div class="container">
+            <div class="section-header">
+                <h2>Os Nossos Serviços</h2>
+                <div class="divider"></div>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🦴</div>
+                    <h3>Fisioterapia Desportiva</h3>
+                    <p>Prevenção e tratamento de lesões em atletas de alto rendimento e amadores.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🧘</div>
+                    <h3>Reabilitação Postural</h3>
+                    <p>Correção da postura e alívio de dores crónicas através de técnicas globais.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">⚡</div>
+                    <h3>Terapia Manual</h3>
+                    <p>Mobilizações e manipulações articulares para restaurar o movimento natural.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">👴</div>
+                    <h3>Geriatria</h3>
+                    <p>Foco na manutenção da autonomia e qualidade de vida na terceira idade.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="sobre">
+        <div class="container">
+            <div class="about-flex">
+                <div class="about-content">
+                    <h2 style="color: var(--primary); margin-bottom: 20px; font-size: 2.5rem;">Cuidado Profissional e Próximo</h2>
+                    <p>Com mais de 10 anos de experiência no mercado português, a nossa clínica foca-se na evidência científica para proporcionar os melhores resultados aos nossos pacientes.</p>
+                    <p style="margin-top: 15px;">Acreditamos que cada corpo é único e merece um plano de tratamento exclusivo, focado no retorno rápido às atividades do dia-a-dia.</p>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <h4>1500+</h4>
+                            <p>Pacientes Felizes</p>
+                        </div>
+                        <div class="stat-item">
+                            <h4>12+</h4>
+                            <p>Especialistas</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <svg viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="500" height="400" rx="20" fill="#f0f7e9"/>
+                        <path d="M100 200 L400 200" stroke="#639D41" stroke-width="20" stroke-linecap="round" opacity="0.3"/>
+                        <circle cx="250" cy="200" r="100" fill="none" stroke="#1D5EA7" stroke-width="2"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contactos">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="#" class="logo" style="margin-bottom: 20px;">
+                        <span class="logo-text" style="color: white;">GuadiFisio</span>
+                    </a>
+                    <p style="color: rgba(255,255,255,0.7)">A sua saúde em boas mãos. Fisioterapia de excelência no coração de Portugal.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Links Rápidos</h4>
+                    <ul class="footer-links">
+                        <li><a href="#inicio">Início</a></li>
+                        <li><a href="#servicos">Serviços</a></li>
+                        <li><a href="#sobre">Sobre Nós</a></li>
+                        <li><a href="#">Privacidade</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contactos</h4>
+                    <ul class="contact-info">
+                        <li>📍 </li>
+                        <li>📞 </li>
+                        <li>✉️ </li>
+                        <li>⏰ Seg - Sex: 09h00 - 20h00</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="year"></span> GuadiFisio. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // 1. Atualizar o ano no footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // 2. Menu Mobile (Simples toggle)
+        const mobileBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileBtn.addEventListener('click', () => {
+            const isVisible = navLinks.style.display === 'flex';
+            if (isVisible) {
+                navLinks.style.display = 'none';
+            } else {
+                navLinks.style.display = 'flex';
+                navLinks.style.flexDirection = 'column';
+                navLinks.style.position = 'absolute';
+                navLinks.style.top = '80px';
+                navLinks.style.left = '0';
+                navLinks.style.width = '100%';
+                navLinks.style.background = 'white';
+                navLinks.style.padding = '20px';
+                navLinks.style.boxShadow = '0 10px 10px rgba(0,0,0,0.1)';
+            }
+        });
+
+        // 3. Efeito de Scroll no Header
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.padding = '10px 0';
+                header.style.boxShadow = '0 4px 15px rgba(0,0,0,0.1)';
+            } else {
+                header.style.padding = '20px 0';
+                header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.05)';
+            }
+        });
+
+        // 4. Smooth scroll extra (opcional para browsers antigos)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                // Fechar menu mobile se estiver aberto
+                if (window.innerWidth < 768) {
+                    navLinks.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
